@@ -1,0 +1,262 @@
+using System;
+
+namespace Final_Capstone_Code
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            //Initializing all of the reference names and the type of structure they are
+            string name, numberOfDice, loop, roll, samePerson, sameDice, sidesOfDice;
+            int numOfDice, numOfSides, scorePlayer, scoreComputer, valuePlayer, valueComputer, minValue, maxValue;
+            bool playAgain;
+
+            //Getting the players name
+            Console.Write("What is your name? ");
+            name = Console.ReadLine();
+            name = name.ToUpper();
+
+            //Getting the number of dice the player wants to use
+            Console.Write("\nHow many dice do you want to use for the game? ");
+            numberOfDice = Console.ReadLine();
+            numOfDice = Int32.Parse(numberOfDice);
+
+            if (numOfDice == 1)
+            {
+
+                //If there is only one die
+                Console.Write("\nHow many sides does the die have? ");
+                sidesOfDice = Console.ReadLine();
+                numOfSides = Int32.Parse(sidesOfDice);
+
+            }
+            else
+            {
+
+                //If there is more than one die
+                Console.Write("\nHow many sides do the dice have? ");
+                sidesOfDice = Console.ReadLine();
+                numOfSides = Int32.Parse(sidesOfDice);
+
+            }            
+
+            //Clearing the name and dice question off of the console
+            Console.Clear();
+
+            //Making playing again equal true to start the game
+            playAgain = true;
+
+            //While they still want to play the game
+            while (playAgain)
+            {
+
+                //Intializing the score of the player and the computer/the dice values of the player and computer
+                scorePlayer = 0;
+                scoreComputer = 0;
+                valuePlayer = 0;
+                valueComputer = 0;
+
+                //Setting up the parameters for the amount of dice that are going to be used
+                minValue = numOfDice;
+                maxValue = (numOfDice * numOfSides);
+
+                //Playing the game until either the player or the computer have a score of 10
+                while (scorePlayer < 3 && scoreComputer < 3)
+                {
+
+                    //Beginning the round
+                    Console.Write("Type in :roll: to begin the round: ");
+                    roll = Console.ReadLine();
+                    roll = roll.ToLower();
+                    Console.Clear();
+
+                    if (roll != "roll")
+                    {
+
+                        //Incase the user inputs something besides "roll"
+                        Console.WriteLine("Invalid entry");
+
+                    }
+                    else
+                    {
+
+                        //Getting the value of the players dice
+                        Random player = new Random();
+                        valuePlayer = player.Next(minValue, maxValue);
+
+                        //Getting the value of the computers dice
+                        Random computer = new Random();
+                        valueComputer = computer.Next(minValue, maxValue);
+
+                        //Printing out the values
+                        Console.WriteLine(name + "'s Score: " + valuePlayer);
+                        Console.WriteLine("COMPUTER'S Score: " + valueComputer);
+
+                        //Checking the results and giving out points
+                        if (valuePlayer == valueComputer)
+                        {
+
+                            //If the player and computer have tied
+                            Console.WriteLine(name + " and the COMPUTER have TIED!");
+
+                        }
+                        else if (valuePlayer > valueComputer)
+                        {
+
+                            //If the player has won
+                            Console.WriteLine(name + " has WON the round!");
+                            scorePlayer++;
+
+                        }
+                        else if (valuePlayer < valueComputer)
+                        {
+
+                            //If the computer has won
+                            Console.WriteLine("The COMPUTER has WON the round!");
+                            scoreComputer++;
+
+                        }
+                        else
+                        {
+
+                        }
+
+                        //Showing the scores
+                        Console.WriteLine("\nSCORES:\n" + name + ": {0}\nCOMPUTER: {1}\n", scorePlayer, scoreComputer);
+
+                    }
+
+                }
+
+                //Showing the winners
+                if (scorePlayer == 3)
+                {
+
+                    //If the player has won the game
+                    Console.WriteLine("\n\n" + name + " has WON the game!");
+
+                }
+                else if (scoreComputer == 3)
+                {
+
+                    //If the computer has won the game
+                    Console.WriteLine("\n\nCOMPUTER has WON the game!");
+
+                }
+                else
+                {
+
+                }
+
+                //Asking if the player wants to play again
+                Console.Write("\n\nWould you like to play again?(y/n) ");
+                loop = Console.ReadLine();
+                Console.Clear();
+
+                if (loop == "y")
+                {
+
+                    //Making the game repeat by making the play again value true
+                    playAgain = true;
+
+                    //Making sure the same person is playing. If yes, ask to change the amount of dice. If no, ask the name and amount of dice.
+                    Console.Write("Is the same person playing?(y/n) ");
+                    samePerson = Console.ReadLine();
+
+                    if (samePerson == "y")
+                    {
+
+                        //Asking if they would like to change the amount of dice
+                        Console.Write("\nWould you like to play with the same amount of dice?(y/n) ");
+                        sameDice = Console.ReadLine();
+
+                        if (sameDice == "n")
+                        {
+
+                            //Registering how many dice they want to use
+                            Console.Write("\nHow many dice would you like to use for the game? ");
+                            numberOfDice = Console.ReadLine();
+                            numOfDice = Int32.Parse(numberOfDice);
+
+                            if (numOfDice == 1)
+                            {
+
+                                //If there is only one die
+                                Console.Write("\nHow many sides does the die have? ");
+                                sidesOfDice = Console.ReadLine();
+                                numOfSides = Int32.Parse(sidesOfDice);
+
+                            }
+                            else
+                            {
+
+                                //If there is more than one die
+                                Console.Write("\nHow many sides do the dice have? ");
+                                sidesOfDice = Console.ReadLine();
+                                numOfSides = Int32.Parse(sidesOfDice);
+
+                            }
+
+                        }
+                        else if (sameDice == "y")
+                        {
+                            
+                        }
+                    }
+                    else if (samePerson == "n")
+                    {
+
+                        //Clear to make room for the questions
+                        Console.Clear();
+
+                        //Getting the name of the new player
+                        Console.Write("What is your name? ");
+                        name = Console.ReadLine();
+                        name = name.ToUpper();
+
+                        //Getting the amount of dice they want to use
+                        Console.Write("\nHow many dice do you want to use for the game? ");
+                        numberOfDice = Console.ReadLine();
+                        numOfDice = Int32.Parse(numberOfDice);
+
+                        if (numOfDice == 1)
+                        {
+
+                            //If there is only one die
+                            Console.Write("\nHow many sides does the die have? ");
+                            sidesOfDice = Console.ReadLine();
+                            numOfSides = Int32.Parse(sidesOfDice);
+
+                        }
+                        else
+                        {
+
+                            //If there is more than one die
+                            Console.Write("\nHow many sides do the dice have? ");
+                            sidesOfDice = Console.ReadLine();
+                            numOfSides = Int32.Parse(sidesOfDice);
+
+                        }
+
+                    }
+
+                    //Clear to start rolling
+                    Console.Clear();
+
+                }
+                else if (loop == "n")
+                {
+
+                    //Close the console if they don't want to play again
+                    playAgain = false;
+
+                }
+                else
+                {
+
+                }
+            }
+        }
+    }
+}
